@@ -4,7 +4,7 @@ import urllib2
 import re
 
 #糗事百科爬虫类
-class QSBK:
+class QSBKSpider:
     def __init__(self):
         '''初始化方法'''
         self.pageIndex = 1
@@ -36,7 +36,7 @@ class QSBK:
             print "页面加载失败...."
             return None
         #使用complie对象将正则表达式编译并存入一个pattern变量中，这里使用四个正则完成
-        pattern = re.compile(r'<h2>(.*?)</h2>.*?'+'<div.*?class="content">(.*?)<!.*?'
+        pattern = re.compile(r'<h2>(.*?)</h2>.*?' + '<div.*?class="content">(.*?)<!.*?'
                          ''+'<div.*?class="stats".*?class="number">(.*?)</i>.*?'+
                          '<span.*?class="dash".*?class="number">(.*?)</i>.*?',re.S)
         items = re.findall(pattern,pageCode)
@@ -89,6 +89,8 @@ class QSBK:
                 #输出阅读内容
                 self.getOneStory(pageStories,nowPage)
 
-
-spider = QSBK()
-spider.start()
+def main():
+    my_spider = QSBKSpider()
+    my_spider.start()
+if __name__ == '__main__':
+    main()
