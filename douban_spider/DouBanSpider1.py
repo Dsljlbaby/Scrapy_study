@@ -10,10 +10,12 @@ class DoubanSpider_1:
         self.reponse = urllib2.urlopen(self.request)
         self.douban_page = self.reponse.read().decode("utf-8")
         print '''
-                  author:  Dsljlbaby
-                  time:    2016-01-08
-                  target:  douban grab
-                  about:   BeautifulSoup and re's study
+        ---------------------------------------
+        author:  Dsljlbaby
+        time:    2016-01-08
+        target:  douban grab
+        about:   BeautifulSoup and re's study
+        ---------------------------------------
               '''
     def getNewMovies(self,pattern):
         douban_list = re.findall(pattern,self.douban_page)
