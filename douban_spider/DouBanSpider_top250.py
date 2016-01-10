@@ -34,10 +34,12 @@ class DouBanSpider_top():
 	def Output(self,my_page):
 		soup = BeautifulSoup(my_page,'lxml')
 		for tag in soup.find_all('div', class_='item'):
-			num = tag.em.get_text()
+			num = int(tag.em.get_text())
 			name = tag.span.get_text()
+			scores = tag.find('span', class_="rating_num").get_text()
+			comments = tag.find("span", class_="inq").get_text()
 			url = str(tag.find('a')).split('"')[1]
-			print (u"Top:%s %s \n链接: %s" %(num, name,url))
+			print (u"Top %d\n片名: %s \n评分: %s\n短评: %s\n链接: %s\n" %(num, name,scores,comments,url))
 def main():
 	my_spider = DouBanSpider_top()
 	start_num = 0
@@ -45,5 +47,6 @@ def main():
 		page = my_spider.getPage(start_num)
 		my_spider.Output(page)
 		start_num = start_num +25
+	print '爬取结束......'
 if __name__ == '__main__':
 	main()
